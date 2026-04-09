@@ -197,6 +197,8 @@ const RIRI_FACE="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST
   <div class="screen active" id="welcome" style="background:#0A0418">
     <img id="splashImg" src="" alt="Riri's Kitchen" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0">
     <div style="position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(8,3,18,0.88) 0%,rgba(8,3,18,0.5) 50%,transparent 100%);z-index:1;pointer-events:none"></div>
+    <!-- heroCanvas hidden but needed by JS -->
+    <canvas id="heroCanvas" width="1" height="1" style="position:absolute;opacity:0;pointer-events:none;z-index:0"></canvas>
     <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;padding:0 1.5rem 2rem">
       <div class="speech-dock" style="max-width:400px;width:100%">
         <div class="speech-top"><div class="rbadge">RIRI</div><div class="vwave" id="wWave"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div></div>
@@ -542,6 +544,7 @@ function rBurst(c,n,x,y,cols){for(let i=0;i<n;i++){const a=Math.random()*Math.PI
 function rTickPts(c){rPts=rPts.filter(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=0.12;p.l-=0.025;if(p.l<=0)return false;c.globalAlpha=p.l;c.fillStyle=p.col;c.beginPath();c.arc(p.x,p.y,p.r,0,Math.PI*2);c.fill();return true;});c.globalAlpha=1;}
 
 function drawRiriOn(canvas,scale,showBG){
+  if(!canvas||canvas.width<10) return;
   const c=canvas.getContext("2d"),W=canvas.width,H=canvas.height;
   c.clearRect(0,0,W,H);
   if(showBG){rTickPts(c);if(rState==="celebrate"&&Math.random()<0.07)rBurst(c,8,W/2,H*0.55,[RC.jp,RC.jc,RC.jpk,RC.jy,RC.jg]);}
@@ -772,8 +775,8 @@ function setImages(){
 
 function loop(){
   rT++;
-  // hero canvas — Riri only, transparent bg (kitchen shows through)
-  drawRiriOn(heroCV,0.72,false);
+  // hero canvas — only draw if visible (welcome screen)
+  if(heroCV && heroCV.width > 1) drawRiriOn(heroCV,0.72,false);
   // panel
   const pc=panelCV.getContext("2d");pc.clearRect(0,0,78,110);
   pc.save();pc.translate(39,106);pc.scale(0.32,0.32);
