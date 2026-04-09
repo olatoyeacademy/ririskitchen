@@ -38,7 +38,7 @@ html,body{height:100%;overflow:hidden;background:#0A0310}
 @keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 16px rgba(155,48,255,0.5))}50%{filter:drop-shadow(0 0 28px rgba(0,212,255,0.7))}}
 #splashTag{font-family:'Nunito',sans-serif;font-size:clamp(.9rem,1.5vw,1.1rem);font-weight:700;color:rgba(255,255,255,0.95);text-shadow:0 2px 12px rgba(0,0,0,0.95)}
 @media(max-width:600px){
-  #splashBg{content:url(bg_mobile.png)}
+  #splashBg{content:url(bg_mobile2.png)}
   #welcome{display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:space-between !important}
   #splashRiri{position:relative !important;bottom:auto !important;left:auto !important;transform:none !important;height:50vh !important;width:auto !important;flex-shrink:0 !important;animation:none !important}
   #splashLogo{position:relative !important;bottom:auto !important;left:auto !important;transform:none !important;width:82% !important;max-width:320px !important;flex-shrink:0 !important}
@@ -727,9 +727,9 @@ const celebCV=document.getElementById("celebCanvas");
 
 function setImages(){
   ["chipImg","lvlImg"].forEach(id=>{const el=document.getElementById(id);if(el)el.src="riri_face.png";});
-  const bg=document.getElementById("splashBg"); if(bg) bg.src="bg.png";
-  const rr=document.getElementById("splashRiri"); if(rr) rr.src="riri.png";
-  const lg=document.getElementById("splashLogo"); if(lg) lg.src="logo.png";
+  const bg=document.getElementById("splashBg"); if(bg) bg.src="bg2.png";
+  const rr=document.getElementById("splashRiri"); if(rr) rr.src="riri2.png";
+  const lg=document.getElementById("splashLogo"); if(lg) lg.src="logo2.png";
 }
 
 function loop(){
