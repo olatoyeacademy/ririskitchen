@@ -732,9 +732,9 @@ async function startDish(id){
   setCoach("Ooh yes! We're making "+curDish.name+"! Let me get your challenge ready!");
   document.getElementById("loader").classList.remove("hidden");
   try{
-    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:`You are Riri, a cool fun kind big-sister AI coach for Emma who is 4 years old. Generate 3 fun cooking challenges. Return ONLY valid JSON, no markdown.
-Format: {"challenges":[{"type":"MATHS or SPELLING or COLOURS or COUNTING","ingredient":"<emoji>","question":"<simple for age 4>","options":["a","b","c","d"],"correct":0,"coaching_before":"<1 fun Riri sentence>","coaching_correct":"<1 celebration>","coaching_wrong":"<1 kind correction>"}]}
-Rules: very simple for 4yo. Maths=1+1. Spelling=3-letter words. Short sentences.`,messages:[{role:"user",content:`3 cooking challenges for ${curDish.name} ${curDish.emoji}. Focus: ${curDish.subject}.`}]}});
+    const sysPrompt="You are Riri, a cool fun kind big-sister AI coach for Emma who is 4 years old. Generate 3 fun cooking challenges. Return ONLY valid JSON, no markdown.\nFormat: {\"challenges\":[{\"type\":\"MATHS or SPELLING or COLOURS or COUNTING\",\"ingredient\":\"<emoji>\",\"question\":\"<simple for age 4>\",\"options\":[\"a\",\"b\",\"c\",\"d\"],\"correct\":0,\"coaching_before\":\"<1 fun Riri sentence>\",\"coaching_correct\":\"<1 celebration>\",\"coaching_wrong\":\"<1 kind correction>\"}]}\nRules: very simple for 4yo. Maths=1+1. Spelling=3-letter words. Short sentences.";
+    const userMsg="3 cooking challenges for "+curDish.name+" "+curDish.emoji+". Focus: "+curDish.subject+".";
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:sysPrompt,messages:[{role:"user",content:userMsg}]})});
     const data=await res.json();challenges=JSON.parse(data.content[0].text.replace(/```json|```/g,"").trim()).challenges;
   }catch(e){challenges=fallback();}
   document.getElementById("loader").classList.add("hidden");rState="idle";showQ(0);
