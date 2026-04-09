@@ -38,19 +38,43 @@ html,body{height:100%;overflow:hidden;background:#0A0310}
 @keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 16px rgba(155,48,255,0.5))}50%{filter:drop-shadow(0 0 28px rgba(0,212,255,0.7))}}
 #splashTag{font-family:'Nunito',sans-serif;font-size:clamp(.85rem,1.4vw,1rem);font-weight:700;color:rgba(255,255,255,0.9);text-shadow:0 2px 10px rgba(0,0,0,0.9)}
 @media(orientation:portrait){
-  /* Use portrait-optimised background */
+  /* Portrait bg */
   #splashBg{content:url(bg_mobile.png)}
-  /* Riri — smaller and higher so logo/button visible */
-  #splashRiri{height:62vh;bottom:22vh}
-  /* Logo — above button, higher up */
-  #splashLogo{bottom:20vh;width:85%;max-width:360px}
-  /* Button + tagline — higher on screen */
-  #splashContent{bottom:8vh;padding:0 1.5rem}
+  /* Riri — top half of screen, feet at 55% down */
+  #splashRiri{
+    height:55vh;
+    bottom:auto;
+    top:2vh;
+    left:50%;
+    transform:translateX(-50%);
+    animation:rirFloatM 4s ease-in-out infinite;
+  }
+  /* Logo — middle of screen */
+  #splashLogo{
+    bottom:auto;
+    top:56vh;
+    left:50%;
+    transform:translateX(-50%);
+    width:82%;
+    max-width:340px;
+  }
+  /* Tagline + button — bottom of screen, always visible */
+  #splashContent{
+    bottom:6vh;
+    left:0;
+    width:100%;
+    transform:none;
+    padding:0 1.5rem;
+  }
 }
 @media(orientation:portrait) and (max-height:700px){
-  #splashRiri{height:55vh;bottom:20vh}
-  #splashLogo{bottom:18vh}
-  #splashContent{bottom:6vh}
+  #splashRiri{height:48vh;top:1vh}
+  #splashLogo{top:50vh;width:78%}
+  #splashContent{bottom:4vh}
+}
+@keyframes rirFloatM{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(-10px)}
 }
 @media(min-width:1400px){#splashRiri{height:92vh}#splashContent{width:46%}}
 
