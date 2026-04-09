@@ -175,7 +175,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg)}
 
   /* Desktop splash layout */
   #splashRiri{right:0!important;height:85vh!important}
-  #splashLogo{max-width:min(480px,55vw)!important}
+  #splashLogo{max-width:min(420px,48vw)!important;margin:0 auto!important}
   @keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 18px rgba(155,48,255,0.5))}50%{filter:drop-shadow(0 0 30px rgba(0,212,255,0.7))}}
   @media (orientation:portrait){
     #splashRiri{right:auto!important;left:50%!important;height:105vh!important;transform:translateX(-38%)!important;animation:rirFloatM 4s ease-in-out infinite!important}
@@ -212,7 +212,7 @@ const RIRI_FACE="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST
     <!-- hidden heroCanvas stub for JS -->
     <canvas id="heroCanvas" width="1" height="1" style="position:absolute;opacity:0;pointer-events:none"></canvas>
     <!-- Content: logo + tagline + button -->
-    <div style="position:absolute;bottom:5vh;left:0;right:45%;z-index:4;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.7rem;padding:0 2rem">
+    <div style="position:absolute;bottom:5vh;left:0;width:55%;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:0.8rem;padding:0 3rem">
       <img id="splashLogo" src="" alt="Riri's Kitchen" style="width:100%;max-width:480px;height:auto;filter:drop-shadow(0 0 18px rgba(155,48,255,0.5));animation:logoGlow 3s ease-in-out infinite">
       <p style="font-family:Nunito,sans-serif;font-size:clamp(0.85rem,1.5vw,1rem);font-weight:700;color:rgba(255,255,255,0.88);letter-spacing:0.04em;text-shadow:0 2px 8px rgba(0,0,0,0.8)">Cook. Learn. Level up with Riri! 👩🏾‍🍳✌️</p>
       <div id="wWave" class="vwave sil" style="display:none"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div>
