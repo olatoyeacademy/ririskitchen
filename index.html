@@ -37,7 +37,7 @@ html,body{height:100%;overflow:hidden;background:#0A0310}
 #splashLogo{position:absolute;top:auto;bottom:22vh;left:50%;transform:translateX(-50%);width:44%;max-width:480px;height:auto;z-index:3;animation:logoGlow 3s ease-in-out infinite}
 @keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 16px rgba(155,48,255,0.5))}50%{filter:drop-shadow(0 0 28px rgba(0,212,255,0.7))}}
 #splashTag{font-family:'Nunito',sans-serif;font-size:clamp(.9rem,1.5vw,1.1rem);font-weight:700;color:rgba(255,255,255,0.95);text-shadow:0 2px 12px rgba(0,0,0,0.95)}
-@media(max-width:600px){
+@media(max-width:768px){
   #splashBg{content:url(bg_mobile2.png)}
   #welcome{
     display:flex !important;
@@ -85,8 +85,6 @@ html,body{height:100%;overflow:hidden;background:#0A0310}
 @keyframes rirFloatM{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-8px)}
-}
-  50%{transform:translateY(-10px)}
 }
 @media(min-width:1400px){#splashRiri{height:92vh}#splashContent{width:46%}}
 
