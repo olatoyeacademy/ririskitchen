@@ -147,7 +147,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg)}
 .vfab{position:fixed;bottom:4.8rem;right:1.2rem;z-index:50;width:46px;height:46px;border-radius:50%;background:white;border:2.5px solid #FFB0C8;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;box-shadow:0 4px 15px rgba(255,100,150,0.2);transition:all 0.2s}
 .vfab:hover{transform:scale(1.1)}
 .vfab.muted{opacity:0.45}
-.vpick{position:fixed;bottom:1.2rem;right:1.2rem;z-index:50;width:46px;height:46px;border-radius:50%;background:white;border:2.5px solid #FFD0A0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;box-shadow:0 4px 15px rgba(255,150,0,0.15);transition:all 0.2s}
+
 .vpick:hover{transform:scale(1.1)}
 
 /* ══ LOADER ══ */
@@ -160,16 +160,16 @@ html,body{height:100%;overflow:hidden;background:var(--bg)}
 @keyframes dA{0%{content:"."}33%{content:".."}66%{content:"..."}100%{content:"."}}
 
 /* ══ VOICE MODAL ══ */
-.vmodal-wrap{position:fixed;inset:0;background:rgba(255,230,200,0.92);z-index:300;display:flex;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(6px)}
-.vmodal-wrap.hidden{display:none}
-.vmodal{background:white;border:3px solid #FFB0C8;border-radius:24px;padding:1.4rem;width:100%;max-width:370px;box-shadow:0 12px 40px rgba(255,100,150,0.2)}
-.vmodal h2{font-family:'Boogaloo',cursive;font-size:1.6rem;color:#FF6B00;text-align:center;margin-bottom:0.3rem}
-.vmodal p{font-size:0.78rem;color:#C09060;text-align:center;margin-bottom:0.9rem}
-#vlist{max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:0.45rem;margin-bottom:1rem}
-.vbtn-item{width:100%;background:#FFFAF4;border:2px solid #FFE0C0;border-radius:14px;padding:0.65rem 0.85rem;display:flex;align-items:center;gap:0.65rem;cursor:pointer;transition:all 0.2s;text-align:left}
-.vbtn-item:hover{border-color:#FF8C00}
-.vbtn-item.sel{background:#FFF0E0;border-color:#FF8C00}
-.vbtn-item div:first-child{font-size:1.3rem}
+
+
+
+
+
+
+
+
+
+
 
   /* ══ SPLASH ══ */
   @keyframes rirFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
@@ -197,16 +197,6 @@ const RIRI_FACE="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST
 <div id="app">
   <div class="loader hidden" id="loader"><div class="lring"></div><div class="llbl">Riri is cooking up your challenge<span class="dots"></span></div></div>
   <button class="vfab" id="vfab" onclick="toggleVoice()">🔊</button>
-  <button class="vpick" onclick="openVoicePicker()">🎤</button>
-
-  <div class="vmodal-wrap hidden" id="vModal">
-    <div class="vmodal">
-      <h2>Pick Riri's Voice 🎤</h2>
-      <p>Tap a voice to preview it!</p>
-      <div id="vlist"></div>
-      <button onclick="closeVoicePicker()" class="btn-start" style="width:100%;padding:0.8rem;font-size:1.2rem">Let's Go! ✌️</button>
-    </div>
-  </div>
 
   <!-- WELCOME -->
   <div class="screen active" id="welcome" style="background:#0A0310;position:relative">
@@ -663,22 +653,6 @@ function replayCoach(){if(lastCoach)speakText(lastCoach);}
 function setCoach(txt){lastCoach=txt;const el=document.getElementById("ptext");if(el)el.textContent=txt;speakText(txt);}
 window.speechSynthesis.onvoiceschanged=()=>{};
 
-function openVoicePicker(){document.getElementById("vModal").classList.remove("hidden");populateVoices();}
-function closeVoicePicker(){document.getElementById("vModal").classList.add("hidden");speakText("Great choice! Let's cook!");}
-function populateVoices(){
-  const all=window.speechSynthesis.getVoices();const en=all.filter(v=>v.lang.startsWith("en"));
-  const fh=["samantha","karen","moira","tessa","victoria","allison","zira","hazel","fiona","kate","aria","ava","emily","jessica","amy","emma","sarah","google uk english female","google us english"];
-  const mh=["daniel","david","alex","fred","lee","rishi","arthur","aaron","thomas","oliver"];
-  en.sort((a,b)=>{const af=fh.some(h=>a.name.toLowerCase().includes(h)),bf=fh.some(h=>b.name.toLowerCase().includes(h));const am=mh.some(h=>a.name.toLowerCase().includes(h)),bm=mh.some(h=>b.name.toLowerCase().includes(h));if(af&&!bf)return -1;if(!af&&bf)return 1;if(am&&!bm)return 1;if(!am&&bm)return -1;return 0;});
-  const list=document.getElementById("vlist");list.innerHTML="";
-  en.forEach((v,i)=>{
-    const iF=fh.some(h=>v.name.toLowerCase().includes(h));const isSel=selVoice?selVoice.name===v.name:i===0;if(isSel&&i===0&&!selVoice)selVoice=v;
-    const btn=document.createElement("button");btn.className="vbtn-item"+(isSel?" sel":"");
-    btn.innerHTML=`<div style="font-size:1.2rem">${iF?"👩":"🎙️"}</div><div style="flex:1"><div style="font-family:Boogaloo,cursive;font-size:0.9rem;color:#3A2010">${v.name}</div><div style="font-size:0.68rem;color:#C09060">${v.lang}${iF?" · Female":""}${v.localService?" · On-device":""}</div></div>${isSel?"<span style='color:#FF8C00'>✓</span>":""}`;
-    btn.onclick=()=>{selVoice=v;document.querySelectorAll(".vbtn-item").forEach(b=>{b.classList.remove("sel");Array.from(b.children).forEach(ch=>{if(ch.textContent==="✓")ch.remove();});});btn.classList.add("sel");const tick=document.createElement("span");tick.style.color="#FF8C00";tick.textContent="✓";btn.appendChild(tick);stopSpeaking();const u=new SpeechSynthesisUtterance("Hey Emma! I'm Riri, your cooking coach!");u.voice=v;u.rate=0.88;u.pitch=1.15;window.speechSynthesis.speak(u);};
-    list.appendChild(btn);
-  });
-}
 
 // ══ APP STATE ══
 const LEVELS=[{min:0,name:"Junior Chef",xpNext:5},{min:5,name:"Kitchen Star",xpNext:12},{min:12,name:"Master Chef",xpNext:25},{min:25,name:"Riri's Apprentice",xpNext:999}];
@@ -806,7 +780,6 @@ function loop(){
 }
 
 setImages();renderMenu();loop();
-setTimeout(()=>openVoicePicker(),900);
 
 </script>
 </body>
