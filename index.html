@@ -824,6 +824,20 @@ window.addEventListener('load', applyMobileLayout);
 window.addEventListener('resize', applyMobileLayout);
 applyMobileLayout();
 
+// DEBUG — remove later
+function showDebug() {
+  let d = document.getElementById('dbg');
+  if (!d) {
+    d = document.createElement('div');
+    d.id = 'dbg';
+    d.style.cssText = 'position:fixed;top:0;left:0;background:red;color:white;font-size:14px;padding:4px 8px;z-index:9999;font-family:monospace';
+    document.body.appendChild(d);
+  }
+  const riri = document.getElementById('splashRiri');
+  d.textContent = 'W:' + window.innerWidth + ' riri:' + (riri ? riri.style.height || 'no-inline' : 'null');
+}
+setInterval(showDebug, 500);
+
 setImages();renderMenu();loop();
 
 
