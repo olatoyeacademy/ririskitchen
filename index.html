@@ -313,6 +313,7 @@ const RIRI_FACE="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST
 // ══ KITCHEN BACKGROUND ══
 (function(){
   const cv=document.getElementById('kitchenCanvas');
+  if(!cv) return;
   const ctx=cv.getContext('2d');
   let W,H,T=0;
   function rsz(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
@@ -820,7 +821,7 @@ function loop(){
 }
 
 setImages();renderMenu();loop();
-setTimeout(()=>speakText(document.getElementById("wText").textContent),1000);
+setTimeout(()=>speakText("Hey Emma! I am Riri your big sis and cooking coach! Let us cook something delicious!"),1000);
 
 </script>
 </body>
