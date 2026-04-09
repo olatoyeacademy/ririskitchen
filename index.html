@@ -172,14 +172,18 @@ html,body{height:100%;overflow:hidden;background:var(--bg)}
 
   /* ══ SPLASH SCREEN ══ */
   @keyframes rirFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+  /* Desktop splash layout */
+  #splashRiri{right:0!important;height:85vh!important}
+  #splashLogo{max-width:min(480px,55vw)!important}
   @keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 18px rgba(155,48,255,0.5))}50%{filter:drop-shadow(0 0 30px rgba(0,212,255,0.7))}}
   @media (orientation:portrait){
     #splashRiri{right:auto!important;left:50%!important;height:105vh!important;transform:translateX(-38%)!important;animation:rirFloatM 4s ease-in-out infinite!important}
-    #welcome > div:last-of-type{left:0!important;right:0!important;width:100%!important;bottom:3.5vh!important;align-items:center!important;text-align:center!important;padding:0 1rem!important}
+    #welcome > div:last-of-type{left:0!important;right:0!important;width:100%!important;bottom:3.5vh!important;align-items:center!important;text-align:center!important;padding:0 1.2rem!important}
     #splashLogo{max-width:88vw!important}
   }
   @keyframes rirFloatM{0%,100%{transform:translateX(-38%) translateY(0)}50%{transform:translateX(-38%) translateY(-10px)}}
-  @media (min-width:1400px){#splashRiri{height:128vh!important;right:10%!important}}
+  @media (min-width:1400px){#splashRiri{height:88vh!important;right:0!important}}
 </style>
 </head>
 <body>
@@ -204,11 +208,11 @@ const RIRI_FACE="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST
     <!-- Bottom gradient -->
     <div style="position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(8,2,20,0.93) 0%,rgba(8,2,20,0.55) 55%,transparent 100%);z-index:1;pointer-events:none"></div>
     <!-- Riri character -->
-    <img id="splashRiri" src="" alt="Riri" style="position:absolute;bottom:0;right:5%;height:130vh;width:auto;z-index:3;filter:drop-shadow(-6px 0 24px rgba(155,48,255,0.3));animation:rirFloat 4s ease-in-out infinite;transform-origin:bottom center">
+    <img id="splashRiri" src="" alt="Riri" style="position:absolute;bottom:0;right:0;height:85vh;width:auto;z-index:3;filter:drop-shadow(-6px 0 24px rgba(155,48,255,0.3));animation:rirFloat 4s ease-in-out infinite;transform-origin:bottom center">
     <!-- hidden heroCanvas stub for JS -->
     <canvas id="heroCanvas" width="1" height="1" style="position:absolute;opacity:0;pointer-events:none"></canvas>
     <!-- Content: logo + tagline + button -->
-    <div style="position:absolute;bottom:5vh;left:5%;width:48%;z-index:4;display:flex;flex-direction:column;align-items:flex-start;gap:0.7rem">
+    <div style="position:absolute;bottom:5vh;left:0;right:45%;z-index:4;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.7rem;padding:0 2rem">
       <img id="splashLogo" src="" alt="Riri's Kitchen" style="width:100%;max-width:480px;height:auto;filter:drop-shadow(0 0 18px rgba(155,48,255,0.5));animation:logoGlow 3s ease-in-out infinite">
       <p style="font-family:Nunito,sans-serif;font-size:clamp(0.85rem,1.5vw,1rem);font-weight:700;color:rgba(255,255,255,0.88);letter-spacing:0.04em;text-shadow:0 2px 8px rgba(0,0,0,0.8)">Cook. Learn. Level up with Riri! 👩🏾‍🍳✌️</p>
       <div id="wWave" class="vwave sil" style="display:none"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div>
