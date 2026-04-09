@@ -715,7 +715,7 @@ function goTo(id,dir){
   const kc=document.getElementById("kitchenCanvas");
   if(kc) kc.style.opacity=id==="welcome"?"0":"1";
   if(id==="menu"){renderMenu();rState="idle";setTimeout(()=>speakText("Hey Emma! Pick a dish and let's cook something delicious!"),400);}
-  if(id==="welcome"){rState="idle";setTimeout(()=>speakText(document.getElementById("wText").textContent),700);}
+  if(id==="welcome"){rState="idle";setTimeout(()=>speakText("Hey Emma! I'm Riri your big sis and cooking coach! Let's cook something delicious!"),700);}
 }
 
 function renderMenu(){
