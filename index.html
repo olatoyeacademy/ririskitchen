@@ -38,84 +38,11 @@ html,body{height:100%;overflow:hidden;background:#0A0310}
 @keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 16px rgba(155,48,255,0.5))}50%{filter:drop-shadow(0 0 28px rgba(0,212,255,0.7))}}
 #splashTag{font-family:'Nunito',sans-serif;font-size:clamp(.85rem,1.4vw,1rem);font-weight:700;color:rgba(255,255,255,0.9);text-shadow:0 2px 10px rgba(0,0,0,0.9)}
 @media(orientation:portrait) and (max-width:768px){
-  #welcome{
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-  }
   #splashBg{content:url(bg_mobile.png)}
-  #splashRiri{
-    position:relative !important;
-    bottom:auto !important;left:auto !important;
-    transform:none !important;
-    height:50vh !important;
-    width:auto !important;
-    flex-shrink:0 !important;
-    animation:none !important;
-  }
-  #splashLogo{
-    position:relative !important;
-    bottom:auto !important;left:auto !important;
-    transform:none !important;
-    width:82% !important;max-width:320px !important;
-    flex-shrink:0 !important;
-  }
-  #splashContent{
-    position:relative !important;
-    bottom:auto !important;left:auto !important;
-    transform:none !important;
-    width:100% !important;
-    padding:0 1.5rem 3vh !important;
-    flex-shrink:0 !important;
-  }
-}
-  #splashBg{content:url(bg_mobile.png)}
-  /* Riri — top section, not absolute */
-  #splashRiri{
-    position:relative !important;
-    bottom:auto !important;
-    left:auto !important;
-    transform:none !important;
-    height:52vh !important;
-    width:auto !important;
-    flex-shrink:0 !important;
-    animation:none !important;
-    margin-top:0 !important;
-  }
-  /* Logo — middle section */
-  #splashLogo{
-    position:relative !important;
-    bottom:auto !important;
-    left:auto !important;
-    transform:none !important;
-    width:82% !important;
-    max-width:320px !important;
-    flex-shrink:0 !important;
-  }
-  /* Button area — bottom section */
-  #splashContent{
-    position:relative !important;
-    bottom:auto !important;
-    left:auto !important;
-    transform:none !important;
-    width:100% !important;
-    padding:0 1.5rem 3vh !important;
-    flex-shrink:0 !important;
-  }
-}
-  #splashRiri{height:52vh !important;bottom:0 !important;transform:translateX(-50%) !important}
-  #splashLogo{bottom:24vh;width:82%;max-width:340px}
-  #splashContent{bottom:6vh !important;z-index:10 !important}
-}
-  #splashRiri{height:60vh;bottom:28vh}
-  #splashLogo{bottom:22vh;width:82%;max-width:340px}
-  #splashContent{bottom:5vh;padding:0 1.5rem}
-}
-@media(orientation:portrait) and (max-height:700px){
-  #splashRiri{height:52vh;bottom:25vh}
-  #splashLogo{bottom:20vh}
-  #splashContent{bottom:3vh}
+  #welcome{display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:space-between !important}
+  #splashRiri{position:relative !important;bottom:auto !important;left:auto !important;transform:none !important;height:50vh !important;width:auto !important;flex-shrink:0 !important;animation:none !important}
+  #splashLogo{position:relative !important;bottom:auto !important;left:auto !important;transform:none !important;width:82% !important;max-width:320px !important;flex-shrink:0 !important}
+  #splashContent{position:relative !important;bottom:auto !important;left:auto !important;transform:none !important;width:100% !important;padding:0 1.5rem 3vh !important;flex-shrink:0 !important}
 }
 @media(min-width:1400px){#splashRiri{height:92vh}#splashContent{width:46%}}
 
