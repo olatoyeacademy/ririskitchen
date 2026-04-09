@@ -791,6 +791,39 @@ function loop(){
   requestAnimationFrame(loop);
 }
 
+// ── MOBILE SPLASH LAYOUT ──
+function applyMobileLayout() {
+  if (window.innerWidth > 900) return; // desktop only above 900px
+
+  const welcome  = document.getElementById('welcome');
+  const bg       = document.getElementById('splashBg');
+  const riri     = document.getElementById('splashRiri');
+  const logo     = document.getElementById('splashLogo');
+  const content  = document.getElementById('splashContent');
+
+  if (!welcome) return;
+
+  // Swap background to portrait version
+  if (bg) bg.src = 'bg_mobile2.png';
+
+  // Welcome = full screen flex column
+  welcome.style.cssText += ';display:flex;flex-direction:column;align-items:center;justify-content:space-between;height:100vh;overflow:hidden;padding:0 0 2vh 0';
+
+  // Riri = top ~45% of screen, relative so flex can push it
+  if (riri) riri.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;height:45vh;width:auto;flex-shrink:1';
+
+  // Logo = middle
+  if (logo) logo.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;width:85%;max-width:320px;flex-shrink:1;margin:0 auto';
+
+  // Content = bottom, flex column centred
+  if (content) content.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;width:100%;padding:0 1.5rem 0;flex-shrink:0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.8rem';
+}
+
+// Run on load and resize
+window.addEventListener('load', applyMobileLayout);
+window.addEventListener('resize', applyMobileLayout);
+applyMobileLayout();
+
 setImages();renderMenu();loop();
 
 
