@@ -834,7 +834,15 @@ function showDebug() {
     document.body.appendChild(d);
   }
   const riri = document.getElementById('splashRiri');
-  d.textContent = 'W:' + window.innerWidth + ' riri:' + (riri ? riri.style.height || 'no-inline' : 'null');
+  const wel = document.getElementById('welcome');
+  const welStyle = wel ? window.getComputedStyle(wel) : null;
+  const ririStyle = riri ? window.getComputedStyle(riri) : null;
+  d.innerHTML = 'W:' + window.innerWidth 
+    + '<br>wel-display:' + (welStyle ? welStyle.display : '?')
+    + '<br>wel-flex:' + (welStyle ? welStyle.flexDirection : '?')
+    + '<br>riri-pos:' + (ririStyle ? ririStyle.position : '?')
+    + '<br>riri-h:' + (ririStyle ? ririStyle.height : '?')
+    + '<br>riri-top:' + (ririStyle ? ririStyle.top : '?');
 }
 setInterval(showDebug, 500);
 
