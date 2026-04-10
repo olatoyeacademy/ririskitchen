@@ -655,15 +655,26 @@ function renderMenu(){
   document.getElementById("lvlNum").textContent=lv.idx+1;
   document.getElementById("lvlName").textContent=lv.name;
   document.getElementById("menuXP").style.width=Math.min(100,Math.round((totalStars-lv.min)/(lv.xpNext-lv.min)*100))+"%";
-  document.getElementById("dgrid").innerHTML=DISHES.map(d=>`
-    <div class="dcard ${d.locked?"locked":""}" onclick="${d.locked?"":` burst(event);startDish("${d.id}")`}">
+  const grid=document.getElementById("dgrid");
+  grid.innerHTML="";
+  DISHES.forEach(d=>{
+    const div=document.createElement("div");
+    div.className="dcard"+(d.locked?" locked":"");
+    div.innerHTML=`
       <div class="dc-bg ${d.cls}"></div><div class="dc-shine"></div><div class="dc-border"></div>
       <div class="dc-orb">${d.emoji}</div>
       <div class="dc-info"><div class="dc-name">${d.name}</div><div class="dc-tag">${d.subject}</div><div class="dc-stars">${[...Array(3)].map((_,i)=>i<d.stars?"⭐":"✦").join("")}</div></div>
       ${d.isNew&&d.stars===0?"<div class='dc-new'>NEW</div>":""}
       ${d.locked?"<div style='position:absolute;top:9px;right:9px;font-size:1.1rem'>🔒</div>":""}
-    </div>
-  `).join("");
+    `;
+    if(!d.locked){
+      div.addEventListener("click",function(e){
+        burst(e);
+        startDish(d.id);
+      });
+    }
+    grid.appendChild(div);
+  });
 }
 
 async function startDish(id){
