@@ -793,33 +793,63 @@ function loop(){
 
 // ── MOBILE SPLASH LAYOUT ──
 function applyMobileLayout() {
-  if (window.innerWidth > 900) return; // desktop only above 900px
+  if (window.innerWidth > 900) return;
 
-  const welcome  = document.getElementById('welcome');
-  const bg       = document.getElementById('splashBg');
-  const riri     = document.getElementById('splashRiri');
-  const logo     = document.getElementById('splashLogo');
-  const content  = document.getElementById('splashContent');
+  const welcome = document.getElementById('welcome');
+  const bg      = document.getElementById('splashBg');
+  const riri    = document.getElementById('splashRiri');
+  const logo    = document.getElementById('splashLogo');
+  const content = document.getElementById('splashContent');
 
-  if (!welcome) return;
+  if (!welcome || !riri) return;
 
-  // Swap background to portrait version
+  // Swap bg
   if (bg) bg.src = 'bg_mobile2.png';
 
-  // Welcome = full screen flex column
-  welcome.style.cssText += ';display:flex;flex-direction:column;align-items:center;justify-content:space-between;height:100vh;overflow:hidden;padding:0 0 2vh 0';
+  const vh = window.innerHeight;
+  const vw = window.innerWidth;
 
-  // Riri = top ~45% of screen, relative so flex can push it
-  if (riri) riri.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;height:36vh;width:auto;flex-shrink:1';
+  // Sizes in px so there is NO ambiguity
+  const ririH  = Math.round(vh * 0.42);  // 42% of screen height
+  const logoW  = Math.round(vw * 0.78);  // 78% of screen width
+  const btnPad = Math.round(vh * 0.02);  // small bottom pad
 
-  // Logo = middle
-  if (logo) logo.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;width:75%;max-width:280px;flex-shrink:1;margin:0 auto';
+  // Riri — absolute, top of screen, centred
+  riri.style.position   = 'absolute';
+  riri.style.top        = '0';
+  riri.style.left       = '50%';
+  riri.style.transform  = 'translateX(-50%)';
+  riri.style.height     = ririH + 'px';
+  riri.style.width      = 'auto';
+  riri.style.bottom     = 'auto';
+  riri.style.zIndex     = '2';
 
-  // Content = bottom, flex column centred
-  if (content) content.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;width:100%;padding:0 1.5rem 1vh;flex-shrink:0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.5rem';
+  // Logo — absolute, just above button
+  const logoTop = ririH + Math.round(vh * 0.02);
+  logo.style.position   = 'absolute';
+  logo.style.top        = logoTop + 'px';
+  logo.style.left       = '50%';
+  logo.style.transform  = 'translateX(-50%)';
+  logo.style.width      = logoW + 'px';
+  logo.style.height     = 'auto';
+  logo.style.bottom     = 'auto';
+  logo.style.zIndex     = '3';
+
+  // Content (tagline + button) — absolute, pinned to bottom
+  content.style.position   = 'absolute';
+  content.style.bottom     = btnPad + 'px';
+  content.style.left       = '50%';
+  content.style.transform  = 'translateX(-50%)';
+  content.style.width      = '90%';
+  content.style.top        = 'auto';
+  content.style.zIndex     = '4';
+  content.style.display    = 'flex';
+  content.style.flexDirection = 'column';
+  content.style.alignItems = 'center';
+  content.style.textAlign  = 'center';
+  content.style.gap        = '0.6rem';
 }
 
-// Run on load and resize
 window.addEventListener('load', applyMobileLayout);
 window.addEventListener('resize', applyMobileLayout);
 applyMobileLayout();
