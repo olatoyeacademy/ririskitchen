@@ -835,14 +835,16 @@ function showDebug() {
   }
   const riri = document.getElementById('splashRiri');
   const wel = document.getElementById('welcome');
-  const welStyle = wel ? window.getComputedStyle(wel) : null;
-  const ririStyle = riri ? window.getComputedStyle(riri) : null;
-  d.innerHTML = 'W:' + window.innerWidth 
-    + '<br>wel-display:' + (welStyle ? welStyle.display : '?')
-    + '<br>wel-flex:' + (welStyle ? welStyle.flexDirection : '?')
-    + '<br>riri-pos:' + (ririStyle ? ririStyle.position : '?')
-    + '<br>riri-h:' + (ririStyle ? ririStyle.height : '?')
-    + '<br>riri-top:' + (ririStyle ? ririStyle.top : '?');
+  const logoEl = document.getElementById('splashLogo');
+  const contEl = document.getElementById('splashContent');
+  const bgEl   = document.getElementById('splashBg');
+  const get = (el) => el ? window.getComputedStyle(el).position : '?';
+  const geth = (el) => el ? window.getComputedStyle(el).height : '?';
+  d.innerHTML = 'W:' + window.innerWidth
+    + '<br>riri-pos:' + get(riri) + ' h:' + geth(riri)
+    + '<br>logo-pos:' + get(logoEl) + ' h:' + geth(logoEl)
+    + '<br>cont-pos:' + get(contEl) + ' h:' + geth(contEl)
+    + '<br>bg-pos:'   + get(bgEl);
 }
 setInterval(showDebug, 500);
 
