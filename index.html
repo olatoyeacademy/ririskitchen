@@ -815,33 +815,7 @@ window.addEventListener('load', () => {
   setTimeout(applyMobileLayout, 1000);
 });
 
-// DEBUG — remove later
-function showDebug() {
-  let d = document.getElementById('dbg');
-  if (!d) {
-    d = document.createElement('div');
-    d.id = 'dbg';
-    d.style.cssText = 'position:fixed;top:0;left:0;background:red;color:white;font-size:14px;padding:4px 8px;z-index:9999;font-family:monospace';
-    document.body.appendChild(d);
-  }
-  const riri = document.getElementById('splashRiri');
-  const wel = document.getElementById('welcome');
-  const logoEl = document.getElementById('splashLogo');
-  const contEl = document.getElementById('splashContent');
-  const bgEl   = document.getElementById('splashBg');
-  const get = (el) => el ? window.getComputedStyle(el).position : '?';
-  const geth = (el) => el ? window.getComputedStyle(el).height : '?';
-  const getBot = (el) => {
-    if (!el) return '?';
-    const r = el.getBoundingClientRect();
-    return Math.round(r.top) + '-' + Math.round(r.bottom);
-  };
-  d.innerHTML = 'VH:' + window.innerHeight
-    + '<br>riri:' + getBot(riri)
-    + '<br>logo:' + getBot(logoEl)
-    + '<br>btn:' + getBot(contEl);
-}
-setInterval(showDebug, 500);
+
 
 setImages();renderMenu();loop();
 
