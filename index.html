@@ -766,13 +766,14 @@ function applyMobileLayout() {
   const vw = window.innerWidth;
 
   // Sizes in px so there is NO ambiguity
-  const ririH  = Math.round(vh * 0.42);  // 42% of screen height
+  const ririH  = Math.round(vh * 0.55);  // 55% of screen height
   const logoW  = Math.round(vw * 0.78);  // 78% of screen width
   const btnPad = Math.round(vh * 0.02);  // small bottom pad
 
-  // Riri — absolute, top of screen, centred
+  // Riri — centred, head slightly visible at top
+  const ririTop = Math.round(vh * 0.04); // 4% from top
   riri.style.position   = 'absolute';
-  riri.style.top        = '0';
+  riri.style.top        = ririTop + 'px';
   riri.style.left       = '50%';
   riri.style.transform  = 'translateX(-50%)';
   riri.style.height     = ririH + 'px';
