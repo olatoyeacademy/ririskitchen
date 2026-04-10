@@ -850,9 +850,15 @@ function applyMobileLayout() {
   content.style.gap        = '0.6rem';
 }
 
-window.addEventListener('load', applyMobileLayout);
 window.addEventListener('resize', applyMobileLayout);
-applyMobileLayout();
+// Run after everything else initialises
+window.addEventListener('load', () => {
+  applyMobileLayout();
+  // Re-run after a short delay to override anything that might reset it
+  setTimeout(applyMobileLayout, 100);
+  setTimeout(applyMobileLayout, 500);
+  setTimeout(applyMobileLayout, 1000);
+});
 
 // DEBUG — remove later
 function showDebug() {
