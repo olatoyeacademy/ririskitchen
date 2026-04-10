@@ -641,6 +641,9 @@ function goTo(id,dir){
   if(dir==="right")next.classList.add("sR");else if(dir==="left")next.classList.add("sL");else if(dir==="up")next.classList.add("sU");
   setTimeout(()=>next.classList.remove("sR","sL","sU"),500);
   window.scrollTo(0,0);
+  // Show kitchen canvas on game screens, hide on welcome
+  const kc=document.getElementById("kitchenCanvas");
+  if(kc) kc.style.opacity=id==="welcome"?"0":"1";
   if(id==="menu"){renderMenu();rState="idle";setTimeout(()=>speakText("Hey Emma! Pick a dish and let's cook something delicious!"),400);}
   if(id==="welcome"){rState="idle";setTimeout(()=>speakText("Hey! I'm Riri your cooking coach! Let's cook something delicious!"),700);}
 }
@@ -676,9 +679,9 @@ async function startDish(id){
   try{
     const sysPrompt="You are Riri, a cool fun kind big-sister AI coach for Emma who is 4 years old. Generate 3 fun cooking challenges. Return ONLY valid JSON, no markdown.\nFormat: {\"challenges\":[{\"type\":\"MATHS or SPELLING or COLOURS or COUNTING\",\"ingredient\":\"<emoji>\",\"question\":\"<simple for age 4>\",\"options\":[\"a\",\"b\",\"c\",\"d\"],\"correct\":0,\"coaching_before\":\"<1 fun Riri sentence>\",\"coaching_correct\":\"<1 celebration>\",\"coaching_wrong\":\"<1 kind correction>\"}]}\nRules: very simple for 4yo. Maths=1+1. Spelling=3-letter words. Short sentences.";
     const userMsg="3 cooking challenges for "+curDish.name+" "+curDish.emoji+". Focus: "+curDish.subject+".";
-    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:sysPrompt,messages:[{role:"user",content:userMsg}]})});
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:sysPrompt,messages:[{role:"user",content:userMsg}]})});
     const data=await res.json();challenges=JSON.parse(data.content[0].text.replace(/```json|```/g,"").trim()).challenges;
-  }catch(e){challenges=fallback();}
+  }catch(e){console.log("API error, using fallback:",e);challenges=fallback();}
   document.getElementById("loader").classList.add("hidden");rState="idle";showQ(0);
 }
 function fallback(){return[{type:"MATHS",ingredient:"🥚",question:"We need 2 eggs! We have 1. How many more?",options:["1","3","5","0"],correct:0,coaching_before:"Okay chef Emma, let's count our ingredients!",coaching_correct:"Yes! 1 more egg! Maths superstar!",coaching_wrong:"We need 1 more egg! You've got this!"},{type:"COLOURS",ingredient:"🍓",question:"What colour is a strawberry?",options:["Red","Blue","Yellow","Green"],correct:0,coaching_before:"Look at this yummy ingredient! What colour is it?",coaching_correct:"Red! So smart Emma!",coaching_wrong:"Strawberries are red! Like a fire engine!"},{type:"COUNTING",ingredient:"🫐",question:"Count the blueberries! 🫐🫐🫐",options:["2","3","4","1"],correct:1,coaching_before:"Can you count these blueberries for me?",coaching_correct:"3 blueberries! Amazing counting Emma!",coaching_wrong:"There are 3! One two three!"}];}
