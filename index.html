@@ -810,13 +810,13 @@ function applyMobileLayout() {
   welcome.style.cssText += ';display:flex;flex-direction:column;align-items:center;justify-content:space-between;height:100vh;overflow:hidden;padding:0 0 2vh 0';
 
   // Riri = top ~45% of screen, relative so flex can push it
-  if (riri) riri.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;height:45vh;width:auto;flex-shrink:1';
+  if (riri) riri.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;height:36vh;width:auto;flex-shrink:1';
 
   // Logo = middle
-  if (logo) logo.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;width:85%;max-width:320px;flex-shrink:1;margin:0 auto';
+  if (logo) logo.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;width:75%;max-width:280px;flex-shrink:1;margin:0 auto';
 
   // Content = bottom, flex column centred
-  if (content) content.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;width:100%;padding:0 1.5rem 0;flex-shrink:0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.8rem';
+  if (content) content.style.cssText = 'position:relative;bottom:auto;left:auto;transform:none;width:100%;padding:0 1.5rem 1vh;flex-shrink:0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.5rem';
 }
 
 // Run on load and resize
