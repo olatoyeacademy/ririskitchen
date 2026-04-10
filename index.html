@@ -762,7 +762,36 @@ async function startDish(id){
   }catch(e){challenges=fallback();}
   document.getElementById("loader").classList.add("hidden");rState="idle";showQ(0);
 }
-function fallback(){return[{type:"MATHS",ingredient:"🥚",question:"We need 2 eggs! We have 1. How many more?",options:["1","3","5","0"],correct:0,coaching_before:"Okay chef Emma, let's count our ingredients! We need 2 eggs! We have 1. How many more?",coaching_correct:"Yes! 1 more egg! Maths superstar!",coaching_wrong:"We need 1 more egg! You've got this!"},{type:"COLOURS",ingredient:"🍓",question:"What colour is a strawberry?",options:["Red","Blue","Yellow","Green"],correct:0,coaching_before:"Look at this yummy ingredient! What colour is a strawberry?",coaching_correct:"Red! So smart Emma!",coaching_wrong:"Strawberries are red! Like a fire engine!"},{type:"COUNTING",ingredient:"🫐",question:"Count the blueberries! 🫐🫐🫐",options:["2","3","4","1"],correct:1,coaching_before:"Can you count these blueberries for me? Count the blueberries!",coaching_correct:"3 blueberries! Amazing counting Emma!",coaching_wrong:"There are 3! One two three!"}];}
+const CHALLENGE_BANK={
+  cake:[
+    {type:"MATHS",ingredient:"🥚",question:"We need 2 eggs! We have 1. How many more?",options:["1","3","5","0"],correct:0,coaching_before:"Okay chef Emma, let's count our ingredients! We need 2 eggs! We have 1. How many more?",coaching_correct:"Yes! 1 more egg! Maths superstar!",coaching_wrong:"We need 1 more egg! You've got this!"},
+    {type:"MATHS",ingredient:"🍫",question:"We have 3 chocolates. We eat 1. How many left?",options:["2","4","1","3"],correct:0,coaching_before:"Yummy chocolate! If we have 3 and eat 1, how many are left?",coaching_correct:"2 chocolates left! Amazing maths Emma!",coaching_wrong:"3 take away 1 is 2! You've got this!"},
+    {type:"COLOURS",ingredient:"🎂",question:"What colour is chocolate cake?",options:["Brown","Pink","Yellow","Blue"],correct:0,coaching_before:"Look at this delicious cake! What colour is chocolate cake?",coaching_correct:"Brown! Just like chocolate! So clever!",coaching_wrong:"Chocolate cake is brown! Like a yummy brownie!"}
+  ],
+  pizza:[
+    {type:"SPELLING",ingredient:"🍕",question:"How do you spell the topping? P _ ZZA",options:["I","A","E","O"],correct:0,coaching_before:"Let's spell pizza topping! P _ ZZA — what letter is missing?",coaching_correct:"P-I-ZZA! Pizza! You can spell it!",coaching_wrong:"The missing letter is I! P-I-ZZA! Pizza!"},
+    {type:"COUNTING",ingredient:"🧀",question:"Count the cheese slices! 🧀🧀🧀🧀",options:["3","5","4","2"],correct:2,coaching_before:"How many cheese slices do we have? Count them carefully!",coaching_correct:"4 cheese slices! Great counting Emma!",coaching_wrong:"Count again — 1, 2, 3, 4! Four cheese slices!"},
+    {type:"COLOURS",ingredient:"🍅",question:"What colour is a tomato?",options:["Red","Green","Blue","Yellow"],correct:0,coaching_before:"We need tomatoes for our pizza! What colour are tomatoes?",coaching_correct:"Red! Tomatoes are red! Brilliant!",coaching_wrong:"Tomatoes are red! Just like ketchup!"}
+  ],
+  soup:[
+    {type:"COLOURS",ingredient:"🥕",question:"What colour is a carrot?",options:["Orange","Purple","Red","Pink"],correct:0,coaching_before:"We need carrots for our rainbow soup! What colour are carrots?",coaching_correct:"Orange! Carrots are orange! So smart!",coaching_wrong:"Carrots are orange! Like a sunset!"},
+    {type:"COUNTING",ingredient:"🥦",question:"Count the broccoli! 🥦🥦",options:["3","1","2","4"],correct:2,coaching_before:"How many broccoli florets do we have? Count them!",coaching_correct:"2 broccoli! Great counting!",coaching_wrong:"Count again — 1, 2! Two broccoli!"},
+    {type:"COLOURS",ingredient:"🌽",question:"What colour is sweetcorn?",options:["Yellow","Orange","White","Green"],correct:0,coaching_before:"Sweetcorn for our soup! What colour is sweetcorn?",coaching_correct:"Yellow! Sweetcorn is yellow! Wonderful!",coaching_wrong:"Sweetcorn is yellow! Like sunshine!"}
+  ],
+  smoothie:[
+    {type:"COUNTING",ingredient:"🫐",question:"Count the blueberries! 🫐🫐🫐",options:["2","3","4","1"],correct:1,coaching_before:"Can you count these blueberries for me? Count the blueberries!",coaching_correct:"3 blueberries! Amazing counting Emma!",coaching_wrong:"There are 3! One two three!"},
+    {type:"COLOURS",ingredient:"🍌",question:"What colour is a banana?",options:["Yellow","Green","Orange","Red"],correct:0,coaching_before:"We need a banana for our smoothie! What colour is a banana?",coaching_correct:"Yellow! Bananas are yellow! Great job!",coaching_wrong:"Bananas are yellow! Like the sun!"},
+    {type:"MATHS",ingredient:"🍓",question:"We have 4 strawberries. We need 2 more. How many total?",options:["6","5","4","8"],correct:0,coaching_before:"Strawberries for our smoothie! 4 plus 2 — how many strawberries total?",coaching_correct:"6 strawberries! Brilliant maths!",coaching_wrong:"4 plus 2 is 6! Six strawberries!"}
+  ]
+};
+
+function fallback(){
+  const id=curDish?curDish.id:"cake";
+  const bank=CHALLENGE_BANK[id]||CHALLENGE_BANK.cake;
+  // Shuffle and pick 3
+  const shuffled=[...bank].sort(()=>Math.random()-0.5);
+  return shuffled.slice(0,3);
+}
 function showQ(idx){
   if(idx>=challenges.length){finish();return;}
   const q=challenges[idx];
