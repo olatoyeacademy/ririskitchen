@@ -831,11 +831,15 @@ function showDebug() {
   const bgEl   = document.getElementById('splashBg');
   const get = (el) => el ? window.getComputedStyle(el).position : '?';
   const geth = (el) => el ? window.getComputedStyle(el).height : '?';
-  d.innerHTML = 'W:' + window.innerWidth
-    + '<br>riri-pos:' + get(riri) + ' h:' + geth(riri)
-    + '<br>logo-pos:' + get(logoEl) + ' h:' + geth(logoEl)
-    + '<br>cont-pos:' + get(contEl) + ' h:' + geth(contEl)
-    + '<br>bg-pos:'   + get(bgEl);
+  const getBot = (el) => {
+    if (!el) return '?';
+    const r = el.getBoundingClientRect();
+    return Math.round(r.top) + '-' + Math.round(r.bottom);
+  };
+  d.innerHTML = 'VH:' + window.innerHeight
+    + '<br>riri:' + getBot(riri)
+    + '<br>logo:' + getBot(logoEl)
+    + '<br>btn:' + getBot(contEl);
 }
 setInterval(showDebug, 500);
 
