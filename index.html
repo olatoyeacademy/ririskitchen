@@ -759,7 +759,7 @@ async function startDish(id){
     const userMsg="3 cooking challenges for "+curDish.name+" "+curDish.emoji+". Focus: "+curDish.subject+".";
     const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:sysPrompt,messages:[{role:"user",content:userMsg}]})});
     const data=await res.json();challenges=JSON.parse(data.content[0].text.replace(/```json|```/g,"").trim()).challenges;
-  }catch(e){challenges=fallback();}
+  }catch(e){challenges=fallback(curDish?curDish.id:'cake');}
   document.getElementById("loader").classList.add("hidden");rState="idle";showQ(0);
 }
 const CHALLENGE_BANK={
@@ -785,8 +785,8 @@ const CHALLENGE_BANK={
   ]
 };
 
-function fallback(){
-  const id=curDish?curDish.id:"cake";
+function fallback(id){
+  id=id||(curDish?curDish.id:"cake");
   const bank=CHALLENGE_BANK[id]||CHALLENGE_BANK.cake;
   // Shuffle and pick 3
   const shuffled=[...bank].sort(()=>Math.random()-0.5);
