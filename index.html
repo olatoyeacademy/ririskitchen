@@ -692,16 +692,7 @@ async function startDish(id){
     const userMsg="3 cooking challenges for "+curDish.name+" "+curDish.emoji+". Focus: "+curDish.subject+".";
     const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:sysPrompt,messages:[{role:"user",content:userMsg}]})});
     const data=await res.json();challenges=JSON.parse(data.content[0].text.replace(/```json|```/g,"").trim()).challenges;
-  }catch(e){
-    console.log('API error:',e);
-    // Show error visibly on screen
-    const errDiv = document.createElement('div');
-    errDiv.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:red;color:white;padding:20px;z-index:9999;font-size:14px;border-radius:8px;max-width:90vw;word-break:break-all';
-    errDiv.textContent = 'ERR: ' + e.message + ' | ' + e.name;
-    document.body.appendChild(errDiv);
-    setTimeout(()=>errDiv.remove(), 8000);
-    challenges=fallback();
-  }
+  }catch(e){challenges=fallback();}
   document.getElementById("loader").classList.add("hidden");rState="idle";showQ(0);
 }
 function fallback(){return[{type:"MATHS",ingredient:"🥚",question:"We need 2 eggs! We have 1. How many more?",options:["1","3","5","0"],correct:0,coaching_before:"Okay chef Emma, let's count our ingredients!",coaching_correct:"Yes! 1 more egg! Maths superstar!",coaching_wrong:"We need 1 more egg! You've got this!"},{type:"COLOURS",ingredient:"🍓",question:"What colour is a strawberry?",options:["Red","Blue","Yellow","Green"],correct:0,coaching_before:"Look at this yummy ingredient! What colour is it?",coaching_correct:"Red! So smart Emma!",coaching_wrong:"Strawberries are red! Like a fire engine!"},{type:"COUNTING",ingredient:"🫐",question:"Count the blueberries! 🫐🫐🫐",options:["2","3","4","1"],correct:1,coaching_before:"Can you count these blueberries for me?",coaching_correct:"3 blueberries! Amazing counting Emma!",coaching_wrong:"There are 3! One two three!"}];}
