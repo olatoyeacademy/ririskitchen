@@ -37,51 +37,7 @@ html,body{height:100%;overflow:hidden;background:#0A0310}
 #splashLogo{position:absolute;top:auto;bottom:22vh;left:50%;transform:translateX(-50%);width:44%;max-width:480px;height:auto;z-index:3;animation:logoGlow 3s ease-in-out infinite}
 @keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 16px rgba(155,48,255,0.5))}50%{filter:drop-shadow(0 0 28px rgba(0,212,255,0.7))}}
 #splashTag{font-family:'Nunito',sans-serif;font-size:clamp(.9rem,1.5vw,1.1rem);font-weight:700;color:rgba(255,255,255,0.95);text-shadow:0 2px 12px rgba(0,0,0,0.95)}
-@media(max-width:768px){
-  #splashBg{content:url(bg_mobile2.png)}
-  #welcome{
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-    height:100vh !important;
-    overflow:hidden !important;
-    padding:0 0 2vh 0 !important;
-  }
-  #splashRiri{
-    position:relative !important;
-    bottom:auto !important;left:auto !important;
-    transform:none !important;
-    height:48vh !important;
-    width:auto !important;
-    flex-shrink:1 !important;
-    animation:rirFloatM 4s ease-in-out infinite !important;
-  }
-  #splashLogo{
-    position:relative !important;
-    bottom:auto !important;left:auto !important;
-    transform:none !important;
-    width:85% !important;
-    max-width:320px !important;
-    flex-shrink:1 !important;
-    margin:0 auto !important;
-  }
-  #splashContent{
-    position:relative !important;
-    bottom:auto !important;left:auto !important;
-    transform:none !important;
-    width:100% !important;
-    padding:0 1.5rem !important;
-    flex-shrink:0 !important;
-    align-items:center !important;
-    text-align:center !important;
-    display:flex !important;
-    flex-direction:column !important;
-    gap:0.6rem !important;
-  }
-  #splashTag{font-size:0.8rem !important;color:white !important;text-shadow:0 2px 8px rgba(0,0,0,0.9) !important}
-  .btn-start{font-size:1.2rem !important;padding:0.75rem 2rem !important}
-}
+
 @keyframes rirFloatM{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-8px)}
