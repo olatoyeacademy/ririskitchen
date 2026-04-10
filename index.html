@@ -781,10 +781,9 @@ function applyMobileLayout() {
   riri.style.bottom     = 'auto';
   riri.style.zIndex     = '2';
 
-  // Logo — absolute, just above button
-  const logoTop = ririH + Math.round(vh * 0.02);
+  // Logo — top of screen
   logo.style.position   = 'absolute';
-  logo.style.top        = logoTop + 'px';
+  logo.style.top        = Math.round(vh * 0.02) + 'px';
   logo.style.left       = '50%';
   logo.style.transform  = 'translateX(-50%)';
   logo.style.width      = logoW + 'px';
