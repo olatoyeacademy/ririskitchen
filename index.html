@@ -610,11 +610,74 @@ function rBraidsFront(c,t){const wt=Date.now()*0.0004;[{sx:-32,sy:-18,cpx:-42,cp
 function rClips(c){c.fillStyle="#1E1E3C";c.beginPath();c.roundRect(8,-46,24,15,4);c.fill();c.strokeStyle=RC.jktP;c.lineWidth=1;c.beginPath();c.roundRect(8,-46,24,15,4);c.stroke();c.fillStyle=RC.jc;c.shadowColor=RC.jc;c.shadowBlur=8;c.beginPath();c.roundRect(11,-43,9,9,2);c.fill();c.fillStyle=RC.jp;c.beginPath();c.roundRect(22,-43,7,9,2);c.fill();c.shadowBlur=0;c.fillStyle="#1E1E3C";c.beginPath();c.roundRect(-32,-38,16,10,3);c.fill();c.fillStyle=RC.jpk;c.shadowColor=RC.jpk;c.shadowBlur=5;c.beginPath();c.roundRect(-30,-36,12,6,2);c.fill();c.shadowBlur=0;}
 function rAura(c,x,y){for(let i=0;i<3;i++){const r=50+i*22+Math.sin(Date.now()*0.003+i)*8,a=0.15-i*0.04;c.strokeStyle=`rgba(180,80,255,${a})`;c.lineWidth=2;c.beginPath();c.arc(0,-80,r,0,Math.PI*2);c.stroke();}}
 
-// ══ VOICE ══
-let voiceOn=true,lastCoach="",selVoice=null;
-function getVoice(){if(selVoice)return selVoice;const vs=window.speechSynthesis.getVoices();const fh=["samantha","karen","moira","tessa","victoria","allison","zira","hazel","fiona","kate","aria","ava","emily","jessica","amy","emma","sarah","google uk english female","google us english"];for(const h of fh){const m=vs.find(v=>v.name.toLowerCase().includes(h));if(m)return m;}return vs.find(v=>v.lang.startsWith("en"))||vs[0]||null;}
-function speakText(txt,cb){if(!voiceOn||!txt)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.rate=0.88;u.pitch=1.15;u.volume=1;const v=getVoice();if(v)u.voice=v;u.onstart=()=>setWaves(true);u.onend=()=>{setWaves(false);if(cb)cb();};u.onerror=()=>setWaves(false);window.speechSynthesis.speak(u);}
-function stopSpeaking(){window.speechSynthesis.cancel();setWaves(false);}
+// ══ VOICE — ElevenLabs audio + browser TTS fallback ══
+let voiceOn=true,lastCoach="",lastAudioFile=null;
+let currentAudio=null;
+
+// Map of text phrases to audio files
+const AUDIO_MAP={
+  "Hey! I'm Riri your cooking coach! Let's cook something delicious!":"audio/welcome.mp3",
+  "Hey Emma! Pick a dish and let's cook something delicious!":"audio/menu.mp3",
+  "Ooh yes! We're making Chocolate Cake! Let me get your challenge ready!":"audio/start_cake.mp3",
+  "Ooh yes! We're making Yummy Pizza! Let me get your challenge ready!":"audio/start_pizza.mp3",
+  "Ooh yes! We're making Rainbow Soup! Let me get your challenge ready!":"audio/start_soup.mp3",
+  "Ooh yes! We're making Super Smoothie! Let me get your challenge ready!":"audio/start_smoothie.mp3",
+  "You cooked the perfect Chocolate Cake! Riri is SO proud of you!":"audio/finish_cake.mp3",
+  "You cooked the perfect Yummy Pizza! Riri is SO proud of you!":"audio/finish_pizza.mp3",
+  "You cooked the perfect Rainbow Soup! Riri is SO proud of you!":"audio/finish_soup.mp3",
+  "You cooked the perfect Super Smoothie! Riri is SO proud of you!":"audio/finish_smoothie.mp3",
+  "Look at you Emma! A real chef AND a scholar! That's my girl!":"audio/celeb_scholar.mp3",
+  "1 star! Keep practising Emma, you're getting there!":"audio/celeb_1star.mp3",
+  "2 stars! Nearly perfect Emma, well done!":"audio/celeb_2stars.mp3",
+  "3 stars! You are a total superstar Emma!":"audio/celeb_3stars.mp3",
+  "Okay chef Emma, let's count our ingredients!":"audio/coach_count.mp3",
+  "Yes! 1 more egg! Maths superstar!":"audio/correct_egg.mp3",
+  "We need 1 more egg! You've got this!":"audio/wrong_egg.mp3",
+  "Look at this yummy ingredient! What colour is it?":"audio/coach_colour.mp3",
+  "Red! So smart Emma!":"audio/correct_red.mp3",
+  "Strawberries are red! Like a fire engine!":"audio/wrong_red.mp3",
+  "Can you count these blueberries for me?":"audio/coach_berries.mp3",
+  "3 blueberries! Amazing counting Emma!":"audio/correct_berries.mp3",
+  "There are 3! One two three!":"audio/wrong_berries.mp3",
+  "Voice is back on!":"audio/voice_on.mp3"
+};
+
+function playAudio(file, cb){
+  if(currentAudio){currentAudio.pause();currentAudio=null;}
+  const a=new Audio(file);
+  currentAudio=a;
+  a.onplay=()=>setWaves(true);
+  a.onended=()=>{setWaves(false);currentAudio=null;if(cb)cb();};
+  a.onerror=()=>{setWaves(false);currentAudio=null;if(cb)cb();};
+  a.play().catch(()=>{setWaves(false);if(cb)cb();});
+}
+
+function speakTTS(txt,cb){
+  if(!txt)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(txt);
+  u.rate=0.88;u.pitch=1.15;u.volume=1;
+  const vs=window.speechSynthesis.getVoices();
+  const fh=["samantha","karen","moira","tessa","google uk english female","google us english"];
+  for(const h of fh){const m=vs.find(v=>v.name.toLowerCase().includes(h));if(m){u.voice=m;break;}}
+  u.onstart=()=>setWaves(true);
+  u.onend=()=>{setWaves(false);if(cb)cb();};
+  u.onerror=()=>setWaves(false);
+  window.speechSynthesis.speak(u);
+}
+
+function speakText(txt,cb){
+  if(!voiceOn||!txt)return;
+  const file=AUDIO_MAP[txt];
+  if(file){lastAudioFile=file;playAudio(file,cb);}
+  else{speakTTS(txt,cb);}
+}
+
+function stopSpeaking(){
+  if(currentAudio){currentAudio.pause();currentAudio=null;}
+  window.speechSynthesis.cancel();
+  setWaves(false);
+}
 function setWaves(on){["wWave","chipWave","pwave"].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle("sil",!on);});rState=on?"talk":rState==="talk"?"idle":rState;}
 function toggleVoice(){voiceOn=!voiceOn;const b=document.getElementById("vfab");b.textContent=voiceOn?"🔊":"🔇";b.classList.toggle("muted",!voiceOn);if(voiceOn)speakText("Voice is back on!");else stopSpeaking();}
 function replayCoach(){if(lastCoach)speakText(lastCoach);}
@@ -721,10 +784,13 @@ function finish(){
   const s=correct===3?3:correct===2?2:1;
   curDish.stars=Math.max(curDish.stars,s);totalStars+=s;curDish.isNew=false;
   document.getElementById("starsRow").innerHTML=[...Array(s)].map((_,i)=>`<span class="star-pop" style="animation-delay:${i*0.35}s">⭐</span>`).join("");
-  const msgs=[`You cooked the perfect ${curDish.name}! Riri is SO proud of you!`,`Look at you Emma! A real chef AND a scholar! That's my girl! ✌️`,`${s} stars! You are a total superstar Emma!`];
-  const msg=msgs[Math.floor(Math.random()*msgs.length)];
+  // Pick message based on stars — use pre-recorded audio
+  const starMsgs={1:"1 star! Keep practising Emma, you're getting there!",2:"2 stars! Nearly perfect Emma, well done!",3:"3 stars! You are a total superstar Emma!"};
+  const bonusMsgs=["You cooked the perfect "+curDish.name+"! Riri is SO proud of you!","Look at you Emma! A real chef AND a scholar! That's my girl!"];
+  const msg=bonusMsgs[Math.floor(Math.random()*bonusMsgs.length)];
+  const starMsg=starMsgs[s];
   document.getElementById("celebSub").textContent=msg;
-  setTimeout(()=>{goTo("celebration","up");rState="celebrate";setTimeout(()=>{speakText(msg);burst({clientX:window.innerWidth/2,clientY:window.innerHeight*0.3});},700);},500);
+  setTimeout(()=>{goTo("celebration","up");rState="celebrate";setTimeout(()=>{speakText(starMsg,()=>setTimeout(()=>speakText(msg),300));burst({clientX:window.innerWidth/2,clientY:window.innerHeight*0.3});},700);},500);
 }
 
 // ══ RENDER LOOP ══
