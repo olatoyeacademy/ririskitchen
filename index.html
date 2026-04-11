@@ -644,6 +644,12 @@ const AUDIO_MAP={
   "Okay chef Emma, let's count our ingredients! We need 2 eggs! We have 1. How many more?":"audio/coach_eggs_full.mp3",
   "Look at this yummy ingredient! What colour is a strawberry?":"audio/coach_colour_full.mp3",
   "Can you count these blueberries for me? Count the blueberries!":"audio/coach_berries_full.mp3",
+  "Yummy chocolate! If we have 3 and eat 1, how many are left?":"audio/cake_coach_choc.mp3",
+  "Look at this delicious cake! What colour is chocolate cake?":"audio/cake_coach_colour.mp3",
+  "2 chocolates left! Amazing maths Emma!":"audio/cake_correct_choc.mp3",
+  "Brown! Just like chocolate! So clever!":"audio/cake_correct_colour.mp3",
+  "3 take away 1 is 2! You've got this!":"audio/cake_wrong_choc.mp3",
+  "Chocolate cake is brown! Like a yummy brownie!":"audio/cake_wrong_colour.mp3",
   "Let's spell pizza topping! P _ ZZA — what letter is missing?":"audio/pizza_coach_spell.mp3",
   "How many cheese slices do we have? Count them carefully!":"audio/pizza_coach_cheese.mp3",
   "We need tomatoes for our pizza! What colour are tomatoes?":"audio/pizza_coach_tomato.mp3",
@@ -655,21 +661,20 @@ const AUDIO_MAP={
   "Tomatoes are red! Just like ketchup!":"audio/pizza_wrong_tomato.mp3",
   "We need carrots for our rainbow soup! What colour are carrots?":"audio/soup_coach_carrot.mp3",
   "How many broccoli florets do we have? Count them!":"audio/soup_coach_broccoli.mp3",
-  "How many broccoli florets do we have? Count them!":"audio/soup_coach_broccoli.mp3"
-  "Yummy chocolate! If we have 3 and eat 1, how many are left?":"audio/cake_coach_choc.mp3",
-  "2 chocolates left! Amazing maths Emma!":"audio/cake_correct_choc.mp3",
-  "3 take away 1 is 2! You've got this!":"audio/cake_wrong_choc.mp3",
-  "Look at this delicious cake! What colour is chocolate cake?":"audio/cake_coach_colour.mp3",
-  "Brown! Just like chocolate! So clever!":"audio/cake_correct_colour.mp3",
-  "Chocolate cake is brown! Like a yummy brownie!":"audio/cake_wrong_colour.mp3",
-  "Orange! Carrots are orange! So smart!":"audio/soup_correct_carrot.mp3",
-  "Carrots are orange! Like a sunset!":"audio/soup_wrong_carrot.mp3",
-  "2 broccoli! Great counting!":"audio/soup_correct_broccoli.mp3",
-  "Count again — 1, 2! Two broccoli!":"audio/soup_wrong_broccoli.mp3",
   "Sweetcorn for our soup! What colour is sweetcorn?":"audio/soup_coach_sweetcorn.mp3",
+  "Orange! Carrots are orange! So smart!":"audio/soup_correct_carrot.mp3",
+  "2 broccoli! Great counting!":"audio/soup_correct_broccoli.mp3",
   "Yellow! Sweetcorn is yellow! Wonderful!":"audio/soup_correct_sweetcorn.mp3",
+  "Carrots are orange! Like a sunset!":"audio/soup_wrong_carrot.mp3",
+  "Count again — 1, 2! Two broccoli!":"audio/soup_wrong_broccoli.mp3",
   "Sweetcorn is yellow! Like sunshine!":"audio/soup_wrong_sweetcorn.mp3",
-}
+  "We need a banana for our smoothie! What colour is a banana?":"audio/smoothie_coach_banana.mp3",
+  "Strawberries for our smoothie! 4 plus 2 — how many strawberries total?":"audio/smoothie_coach_strawberry.mp3",
+  "Yellow! Bananas are yellow! Great job!":"audio/smoothie_correct_banana.mp3",
+  "6 strawberries! Brilliant maths!":"audio/smoothie_correct_strawberry.mp3",
+  "Bananas are yellow! Like the sun!":"audio/smoothie_wrong_banana.mp3",
+  "4 plus 2 is 6! Six strawberries!":"audio/smoothie_wrong_strawberry.mp3"
+};
 
 function playAudio(file, cb){
   if(currentAudio){currentAudio.pause();currentAudio=null;}
