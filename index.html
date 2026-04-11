@@ -932,17 +932,15 @@ function applyMobileLayout() {
 
 window.addEventListener('resize', applyMobileLayout);
 // Run after everything else initialises
+setImages();renderMenu();loop();
+
 window.addEventListener('load', () => {
+  setImages(); // re-run after load to ensure images are set
   applyMobileLayout();
-  // Re-run after a short delay to override anything that might reset it
   setTimeout(applyMobileLayout, 100);
   setTimeout(applyMobileLayout, 500);
   setTimeout(applyMobileLayout, 1000);
 });
-
-
-
-setImages();renderMenu();loop();
 
 
 </script>
