@@ -676,7 +676,34 @@ function playAudio(file, cb){
   const a=new Audio(file);
   currentAudio=a;
   a.onplay=()=>setWaves(true);
-  a.onended=()=>{setWaves(false);currentAudio=null;if(cb)cb();};
+  a.onended=()=>{setWaves(false);currentAudio=null;if(cb)cb();,
+  "Yummy chocolate! If we have 3 and eat 1, how many are left?":"audio/cake_coach_choc.mp3",
+  "2 chocolates left! Amazing maths Emma!":"audio/cake_correct_choc.mp3",
+  "3 take away 1 is 2! You've got this!":"audio/cake_wrong_choc.mp3",
+  "Look at this delicious cake! What colour is chocolate cake?":"audio/cake_coach_colour.mp3",
+  "Brown! Just like chocolate! So clever!":"audio/cake_correct_colour.mp3",
+  "Chocolate cake is brown! Like a yummy brownie!":"audio/cake_wrong_colour.mp3",
+  "Orange! Carrots are orange! So smart!":"audio/soup_correct_carrot.mp3",
+  "Carrots are orange! Like a sunset!":"audio/soup_wrong_carrot.mp3",
+  "2 broccoli! Great counting!":"audio/soup_correct_broccoli.mp3",
+  "Count again — 1, 2! Two broccoli!":"audio/soup_wrong_broccoli.mp3",
+  "Sweetcorn for our soup! What colour is sweetcorn?":"audio/soup_coach_sweetcorn.mp3",
+  "Yellow! Sweetcorn is yellow! Wonderful!":"audio/soup_correct_sweetcorn.mp3",
+  "Sweetcorn is yellow! Like sunshine!":"audio/soup_wrong_sweetcorn.mp3",
+  "Yummy chocolate! If we have 3 and eat 1, how many are left?":"audio/cake_coach_choc.mp3",
+  "2 chocolates left! Amazing maths Emma!":"audio/cake_correct_choc.mp3",
+  "3 take away 1 is 2! You've got this!":"audio/cake_wrong_choc.mp3",
+  "Look at this delicious cake! What colour is chocolate cake?":"audio/cake_coach_colour.mp3",
+  "Brown! Just like chocolate! So clever!":"audio/cake_correct_colour.mp3",
+  "Chocolate cake is brown! Like a yummy brownie!":"audio/cake_wrong_colour.mp3",
+  "Orange! Carrots are orange! So smart!":"audio/soup_correct_carrot.mp3",
+  "Carrots are orange! Like a sunset!":"audio/soup_wrong_carrot.mp3",
+  "2 broccoli! Great counting!":"audio/soup_correct_broccoli.mp3",
+  "Count again — 1, 2! Two broccoli!":"audio/soup_wrong_broccoli.mp3",
+  "Sweetcorn for our soup! What colour is sweetcorn?":"audio/soup_coach_sweetcorn.mp3",
+  "Yellow! Sweetcorn is yellow! Wonderful!":"audio/soup_correct_sweetcorn.mp3",
+  "Sweetcorn is yellow! Like sunshine!":"audio/soup_wrong_sweetcorn.mp3"
+};
   a.onerror=()=>{setWaves(false);currentAudio=null;if(cb)cb();};
   a.play().catch(()=>{setWaves(false);if(cb)cb();});
 }
