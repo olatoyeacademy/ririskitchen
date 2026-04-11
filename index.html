@@ -643,7 +643,7 @@ const AUDIO_MAP={
   "Hey Emma! Pick a dish and let's cook!":"audio/menu_chip.mp3",
   "Okay chef Emma, let's count our ingredients! We need 2 eggs! We have 1. How many more?":"audio/coach_eggs_full.mp3",
   "Look at this yummy ingredient! What colour is a strawberry?":"audio/coach_colour_full.mp3",
-  "Can you count these blueberries for me? Count the blueberries!":"audio/coach_berries_full.mp3"
+  "Can you count these blueberries for me? Count the blueberries!":"audio/coach_berries_full.mp3",
   "Let's spell pizza topping! P _ ZZA — what letter is missing?":"audio/pizza_coach_spell.mp3",
   "How many cheese slices do we have? Count them carefully!":"audio/pizza_coach_cheese.mp3",
   "We need tomatoes for our pizza! What colour are tomatoes?":"audio/pizza_coach_tomato.mp3",
@@ -654,7 +654,8 @@ const AUDIO_MAP={
   "Count again — 1, 2, 3, 4! Four cheese slices!":"audio/pizza_wrong_cheese.mp3",
   "Tomatoes are red! Just like ketchup!":"audio/pizza_wrong_tomato.mp3",
   "We need carrots for our rainbow soup! What colour are carrots?":"audio/soup_coach_carrot.mp3",
-}
+  "How many broccoli florets do we have? Count them!":"audio/soup_coach_broccoli.mp3"
+};
 
 function playAudio(file, cb){
   if(currentAudio){currentAudio.pause();currentAudio=null;}
