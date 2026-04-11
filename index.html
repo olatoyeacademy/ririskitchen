@@ -169,10 +169,10 @@ html,body{height:100%;overflow:hidden;background:#0A0310}
 
   <!-- WELCOME -->
   <div class="screen active" id="welcome">
-    <img id="splashBg" src="" alt="" onerror="this.style.outline='5px solid red'">
-    <img id="splashRiri" src="" alt="Riri" onerror="this.style.outline='5px solid blue'">
+    <img id="splashBg" src="bg.webp" alt="">
+    <img id="splashRiri" src="riri.webp" alt="Riri">
     <canvas id="heroCanvas" width="1" height="1" style="position:absolute;opacity:0;pointer-events:none"></canvas>
-    <img id="splashLogo" src="" alt="Riri's Kitchen">
+    <img id="splashLogo" src="logo.webp" alt="Riri's Kitchen">
     <div id="splashContent">
       <p id="splashTag">Cook. Learn. Level up with Riri! 👩🏾&#x200d;🍳✌️</p>
       <button class="btn-start" onclick="burst(event);goTo('menu','right')">LET'S COOK! 🍴</button>
@@ -846,17 +846,6 @@ const celebCV=document.getElementById("celebCanvas");
 function setImages(){
   ["chipImg","lvlImg"].forEach(id=>{const el=document.getElementById(id);if(el)el.src="riri_face.webp";});
   const bg=document.getElementById("splashBg"); if(bg) bg.src="bg.webp";
-  // Debug: show what src was set
-  setTimeout(()=>{
-    const d=document.createElement("div");
-    d.style.cssText="position:fixed;top:0;left:0;background:rgba(0,0,0,0.8);color:white;font-size:11px;padding:4px;z-index:9999;max-width:100vw";
-    const bg2=document.getElementById("splashBg");
-    const rr2=document.getElementById("splashRiri");
-    const lg2=document.getElementById("splashLogo");
-    d.textContent="bg:"+bg2.src.split("/").pop()+" riri:"+rr2.src.split("/").pop()+" logo:"+lg2.src.split("/").pop();
-    document.body.appendChild(d);
-    setTimeout(()=>d.remove(),5000);
-  },1000);
   const rr=document.getElementById("splashRiri"); if(rr) rr.src="riri.webp";
   const lg=document.getElementById("splashLogo"); if(lg) lg.src="logo.webp";
 }
