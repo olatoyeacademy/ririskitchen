@@ -844,10 +844,10 @@ const panelCV=document.getElementById("panelCanvas");
 const celebCV=document.getElementById("celebCanvas");
 
 function setImages(){
-  ["chipImg","lvlImg"].forEach(id=>{const el=document.getElementById(id);if(el)el.src="riri_face.png";});
-  const bg=document.getElementById("splashBg"); if(bg) bg.src="bg2.png";
-  const rr=document.getElementById("splashRiri"); if(rr) rr.src="riri2.png";
-  const lg=document.getElementById("splashLogo"); if(lg) lg.src="logo2.png";
+  ["chipImg","lvlImg"].forEach(id=>{const el=document.getElementById(id);if(el)el.src="riri_face.webp";});
+  const bg=document.getElementById("splashBg"); if(bg) bg.src="bg.webp";
+  const rr=document.getElementById("splashRiri"); if(rr) rr.src="riri.webp";
+  const lg=document.getElementById("splashLogo"); if(lg) lg.src="logo.webp";
 }
 
 function loop(){
@@ -885,7 +885,7 @@ function applyMobileLayout() {
   if (!welcome || !riri) return;
 
   // Swap bg
-  if (bg) bg.src = 'bg_mobile2.png';
+  if (bg) bg.src = 'bg_mobile.webp';
 
   const vh = window.innerHeight;
   const vw = window.innerWidth;
