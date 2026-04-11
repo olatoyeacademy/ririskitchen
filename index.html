@@ -654,6 +654,7 @@ const AUDIO_MAP={
   "Count again — 1, 2, 3, 4! Four cheese slices!":"audio/pizza_wrong_cheese.mp3",
   "Tomatoes are red! Just like ketchup!":"audio/pizza_wrong_tomato.mp3",
   "We need carrots for our rainbow soup! What colour are carrots?":"audio/soup_coach_carrot.mp3",
+  "How many broccoli florets do we have? Count them!":"audio/soup_coach_broccoli.mp3",
   "How many broccoli florets do we have? Count them!":"audio/soup_coach_broccoli.mp3"
 };
 
@@ -795,8 +796,7 @@ const CHALLENGE_BANK={
     {type:"COLOURS",ingredient:"🍌",question:"What colour is a banana?",options:["Yellow","Green","Orange","Red"],correct:0,coaching_before:"We need a banana for our smoothie! What colour is a banana?",coaching_correct:"Yellow! Bananas are yellow! Great job!",coaching_wrong:"Bananas are yellow! Like the sun!"},
     {type:"MATHS",ingredient:"🍓",question:"We have 4 strawberries. We need 2 more. How many total?",options:["6","5","4","8"],correct:0,coaching_before:"Strawberries for our smoothie! 4 plus 2 — how many strawberries total?",coaching_correct:"6 strawberries! Brilliant maths!",coaching_wrong:"4 plus 2 is 6! Six strawberries!"}
   ]
-  "How many broccoli florets do we have? Count them!":"audio/soup_coach_broccoli.mp3",
-}
+};
 
 function fallback(id){
   id=id||(curDish?curDish.id:"cake");
